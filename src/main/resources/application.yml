@@ -1,0 +1,33 @@
+spring:
+  main:
+    # stdio 서버는 내장 웹서버(Tomcat 등)가 필요 없음 - 반드시 none으로 설정
+    web-application-type: none
+    banner-mode: off
+
+  ai:
+    mcp:
+      server:
+        name: mcp-demo-server
+        version: 0.0.1
+        type: SYNC          # 동기 방식 stdio 서버
+        capabilities:
+          tool: true
+          resource: false
+          prompt: false
+
+  # H2 파일 DB - 프로젝트 폴더 하위 data/ 디렉터리에 파일로 영구 저장됨
+  datasource:
+    url: jdbc:h2:file:./data/mcpdb;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+
+# 날씨 조회 API 베이스 URL (wttr.in - 별도 API 키 불필요)
+weather:
+  base-url: https://wttr.in

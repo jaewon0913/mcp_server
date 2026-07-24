@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  중요: stdio 방식 MCP 서버는 JSON-RPC 메시지가 표준 출력(stdout)으로 오고 갑니다.
+  Spring 배너, 일반 콘솔 로그가 단 한 줄이라도 stdout에 찍히면 프로토콜이 깨져
+  클라이언트(Claude Desktop 등)가 연결에 실패합니다.
+  그래서 이 설정에서는 콘솔(Appender)을 아예 두지 않고 파일로만 로그를 남깁니다.
+-->
+<configuration>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/mcp-demo-server.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/mcp-demo-server.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="com.example.mcpserver" level="INFO"/>
+</configuration>
