@@ -6,20 +6,25 @@ Spring AI 기반 STDIO MCP 서버 예제입니다.
 ## 요구사항
 
 - Java 21 이상
-- Maven 3.9 이상
+- 별도 Gradle 설치 불필요 (Gradle Wrapper 포함)
 
 ## 빌드
 
 ```bash
-mvn clean package
+# macOS / Linux
+./gradlew clean build
+
+# Windows
+gradlew.bat clean build
 ```
 
-빌드가 끝나면 `target/mcp-demo-server-0.0.1-SNAPSHOT.jar` 파일이 생성됩니다.
+빌드가 끝나면 `build/libs/mcp-demo-server-0.0.1-SNAPSHOT.jar` 파일이 생성됩니다.
+(실행 가능한 jar만 빠르게 만들고 싶다면 `./gradlew bootJar`만 실행해도 됩니다.)
 
 ## 로컬에서 직접 실행해보기 (동작 확인용)
 
 ```bash
-java -jar target/mcp-demo-server-0.0.1-SNAPSHOT.jar
+java -jar build/libs/mcp-demo-server-0.0.1-SNAPSHOT.jar
 ```
 
 정상 동작하면 터미널에 아무것도 출력되지 않고 대기 상태가 됩니다 (STDIO 모드라 정상입니다).
@@ -40,7 +45,7 @@ Claude Desktop 설정 파일(`claude_desktop_config.json`)에 아래 내용을 �
       "command": "java",
       "args": [
         "-jar",
-        "/절대경로/mcp-demo-server/target/mcp-demo-server-0.0.1-SNAPSHOT.jar"
+        "/절대경로/mcp-demo-server/build/libs/mcp-demo-server-0.0.1-SNAPSHOT.jar"
       ]
     }
   }
